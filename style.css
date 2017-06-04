@@ -12,16 +12,18 @@ form {
         color: #545e57;
         font-size: 1.5rem;
         padding: 1rem;
+        border-radius: 4px;
 }
 .display {
         width: 16rem;
         min-height: 4rem;
         margin: auto;
         padding: 0.2rem;
-        background-color: #f7f7f7;
+        background-color: #f9f7f7;
         border: 1px solid #c7ddce;
         margin-bottom: 1rem;
         color: #e59217;
+        border-radius: 4px;
 }
 .result {
         display: block;
@@ -47,9 +49,23 @@ form {
         color: #545e57;
         background-color: #f7f7f7;
         border: 1px solid #c7ddce;
+        transition: 0.1s background-color ease;
+        border-radius: 4px;
+}
+.btn.warning {
+        background-color: #eae9b4;
+}
+.btn.warning:hover {
+        background-color: #eae97f;
+}
+.btn.warning:active {
+        background-color: #e3e29b;
 }
 .btn:hover {
         background-color: #99aa9f;
+}
+.btn:active {
+        background-color: #aabdb0;
 }
 .btn-wide {
         width: 8rem;
