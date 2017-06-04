@@ -3,36 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Calculator</title>
+    <link rel="stylesheet" type-"text/css" href="normalize.css">
+    <link rel="stylesheet" type-"text/css" href="style.css">
   </head>
   <body>
     <form>
-      <output name="result">
-      </output>
-      <output name="calculation">
-      </output>
-      <section>
-        <button>AC</button>
-        <button>CE</button>
-        <button>&div;</button>
-        <button>&times;</button>
+      <div class="display">
+        <output class="result" name="result">500
+        </output>
+        <output class="calculation" name="calculation">
+          200 + 300 = 500
+        </output>
+      </div>
+      <section class="button-container">
+        <button type="button" class="btn">AC</button>
+        <button type="button" class="btn">CE</button>
+        <button type="button" class="btn">&div;</button>
+        <button type="button" class="btn">&times;</button>
 
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>&minus;</button>
+        <button type="button" class="btn">7</button>
+        <button type="button" class="btn">8</button>
+        <button type="button" class="btn">9</button>
+        <button type="button" class="btn">&minus;</button>
 
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>&plus;</button>
+        <button type="button" class="btn">4</button>
+        <button type="button" class="btn">5</button>
+        <button type="button" class="btn">6</button>
+        <button type="button" class="btn">&plus;</button>
 
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>=</button>
+        <button type="button" class="btn">1</button>
+        <button type="button" class="btn">2</button>
+        <button type="button" class="btn">3</button>
+        <button type="button" class="btn btn-tall">=</button>
 
-        <button>0</button>
-        <button>.</button>
+        <button type="button" class="btn btn-wide">0</button>
+        <button type="button" class="btn">.</button>
       </section>
     </form>
   </body>        
