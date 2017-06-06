@@ -1,76 +1,76 @@
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 form {
-        width: 18rem;
-        margin: auto;
-        margin-top: 2rem;
-        background-color: #c7ddce;
-        color: #545e57;
-        font-size: 1.5rem;
-        padding: 1rem;
-        border-radius: 4px;
+    width: 18rem;
+    margin: auto;
+    margin-top: 2rem;
+    background-color: #c7ddce;
+    color: #545e57;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
 }
 .display {
-        width: 16rem;
-        min-height: 4rem;
-        margin: auto;
-        padding: 0.2rem;
-        background-color: #f9f7f7;
-        border: 1px solid #c7ddce;
-        margin-bottom: 1rem;
-        color: #e59217;
-        border-radius: 4px;
+    width: 16rem;
+    min-height: 4rem;
+    margin: auto;
+    padding: 0.2rem;
+    background-color: #f9f7f7;
+    border: 1px solid #c7ddce;
+    margin-bottom: 1rem;
+    color: #e59217;
+    border-radius: 4px;
 }
 .result {
-        display: block;
-        font-size: 1.5em;
-        text-align: right;
+    display: block;
+    font-size: 1.5em;
+    text-align: right;
 }
 .calculation {
-        display: block;
-        font-size: 0.6em;
-        text-align: right;
-        color: #e5ba79;
+    display: block;
+    font-size: 0.6em;
+    text-align: right;
+    color: #e5ba79;
 }
 .button-container {
-        width: 16rem;
-        overflow: auto;
+    width: 16rem;
+    overflow: auto;
 }
 .btn {
-        width: 4rem; 
-        height: 4rem;
-        margin: 0;
-        padding: 0;
-        float: left; /* removes whitespace between buttons */
-        color: #545e57;
-        background-color: #f7f7f7;
-        border: 1px solid #c7ddce;
-        transition: 0.1s background-color ease;
-        border-radius: 4px;
+    width: 4rem; 
+    height: 4rem;
+    margin: 0;
+    padding: 0;
+    float: left; /* removes whitespace between buttons */
+    color: #545e57;
+    background-color: #f7f7f7;
+    border: 1px solid #c7ddce;
+    transition: 0.1s background-color ease;
+    border-radius: 4px;
 }
 .btn.warning {
-        background-color: #eae9b4;
+    background-color: #eae9b4;
 }
 .btn.warning:hover {
-        background-color: #eae97f;
+    background-color: #eae97f;
 }
 .btn.warning:active {
-        background-color: #e3e29b;
+    background-color: #e3e29b;
 }
 .btn:hover {
-        background-color: #99aa9f;
+    background-color: #99aa9f;
 }
 .btn:active {
-        background-color: #aabdb0;
+    background-color: #aabdb0;
 }
 .btn-wide {
-        width: 8rem;
+    width: 8rem;
 }
 .btn-tall {
-        height: 8rem;
-        float: right;
+    height: 8rem;
+    float: right;
 }
