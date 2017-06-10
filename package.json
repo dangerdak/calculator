@@ -1,0 +1,26 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "Javascript calculator app",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangerdak/calculator.git"
+  },
+  "keywords": [
+    "calculator",
+    "javascript"
+  ],
+  "author": "Dakshina Scott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dangerdak/calculator/issues"
+  },
+  "homepage": "https://github.com/dangerdak/calculator#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
+}
