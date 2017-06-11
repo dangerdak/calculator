@@ -1,30 +1,39 @@
 window.onload = function() {
   var resultElt = document.getElementById('js-result');
-  var result = '400';
 
   var calculation = {
-    string: '',
+    string: [],
     sequence: [],
     lastPress: '',
     subtotal: 0,
   };
 
   var calculationElt = document.getElementById('js-calculation');
-  resultElt.textContent  = result;
 
   var buttons = document.getElementsByClassName('btn');
   for (var i = 0; buttons[i]; i++) {
     buttons[i].addEventListener('click', function(e) {
-      // Add handler function to end of calculation sequence
-      calculation.sequence.push(handlers[e.target.id]);
-      console.log(calculation.sequence);
-      // Display calculation sequence
-      calculation.string += e.target.textContent;
-      calculationElt.textContent = calculation.string;
-      if (e.target.id === 'equals') {
-        calculation.string += handlers.equals(calculation.sequence);
-        calculationElt.textContent = calculation.string;
+      var total;
+      if (e.target.id === 'clearAll') {
+        calculation.sequence = [];
+        calculation.string = [];
       }
+      else if (e.target.id === 'clearLast') {
+        calculation.sequence.pop();
+        calculation.string.pop();
+      }
+      else {
+        // Add handler function to end of calculation sequence
+        calculation.sequence.push(handlers[e.target.id]);
+        // Display calculation sequence
+        calculation.string.push(e.target.textContent);
+        if (e.target.id === 'equals') {
+          total = handlers.equals(calculation.sequence);
+          calculation.string.push(total);
+          resultElt.textContent = total;
+        }
+      }
+      calculationElt.textContent = calculation.string.join('');
     });
   }
 };
