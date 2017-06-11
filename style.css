@@ -24,6 +24,7 @@ form {
     margin-bottom: 1rem;
     color: #e59217;
     border-radius: 4px;
+    position: relative;
 }
 .result {
     display: block;
@@ -34,6 +35,9 @@ form {
     display: block;
     font-size: 0.6em;
     text-align: right;
+    position: absolute;
+    bottom: 0.1em;
+    right: 0.1em;
     color: #e5ba79;
 }
 .button-container {
