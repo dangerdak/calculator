@@ -4,9 +4,9 @@ window.onload = function() {
 
   var calculation = {
     string: '',
+    sequence: [],
     lastPress: '',
     subtotal: 0,
-    run: null,
   };
 
   var calculationElt = document.getElementById('js-calculation');
@@ -15,15 +15,16 @@ window.onload = function() {
   var buttons = document.getElementsByClassName('btn');
   for (var i = 0; buttons[i]; i++) {
     buttons[i].addEventListener('click', function(e) {
+      // Add handler function to end of calculation sequence
+      calculation.sequence.push(handlers[e.target.id]);
+      console.log(calculation.sequence);
+      // Display calculation sequence
       calculation.string += e.target.textContent;
       calculationElt.textContent = calculation.string;
-      if (calculation.run) {
-        calculation.run = handlers[e.target.id].bind(calculation.run);
+      if (e.target.id === 'equals') {
+        calculation.string += handlers.equals(calculation.sequence);
+        calculationElt.textContent = calculation.string;
       }
-      else {
-        calculation.run = handlers[e.target.id];
-      }
-      
     });
   }
 };
@@ -34,8 +35,8 @@ var handlers = {
       return leftOperand + rightOperand;
     };
   },
-  minus: function(rightOperand) {
-    return function(leftOperand) {
+  minus: function(leftOperand) {
+    return function(rightOperand) {
       return leftOperand - rightOperand;
     };
   },
@@ -44,11 +45,18 @@ var handlers = {
       return leftOperand * rightOperand;
     };
   },
-  dividedBy: function(rightOperand) {
-    return function(leftOperand) {
+  dividedBy: function(leftOperand) {
+    return function(rightOperand) {
       return leftOperand / rightOperand;
     };
   },
+  equals: function(sequence) {
+    var total = sequence.slice(1, -1).reduce(function(acc, fn) {
+      return fn(acc);
+    }, sequence[0]());
+    return total;
+  },
+  // Return combined digits if acting on number
   zero: function(fn) { return fn ? fn(0) : 0; },
   one: function(fn) { return fn ? fn(1) : 1; },
   two: function(fn) { return fn ? fn(2) : 2; },
