@@ -17,6 +17,7 @@ window.onload = function() {
       if (e.target.id === 'clearAll') {
         calculation.sequence = [];
         calculation.string = [];
+        resultElt.textContent = '';
       }
       else if (e.target.id === 'clearLast') {
         calculation.sequence.pop();
