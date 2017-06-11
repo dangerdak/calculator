@@ -18,7 +18,7 @@ window.onload = function() {
       calculation.string += e.target.textContent;
       calculationElt.textContent = calculation.string;
       if (calculation.run) {
-        calculation.run = handlers[e.target.id].bind(calculation.run);
+        calculation.run = handlers[e.target.id].bind(null, calculation.run);
       }
       else {
         calculation.run = handlers[e.target.id];
@@ -48,6 +48,9 @@ var handlers = {
     return function(leftOperand) {
       return leftOperand / rightOperand;
     };
+  },
+  clearAll: function() {
+    return null;
   },
   zero: function(fn) { return fn ? fn(0) : 0; },
   one: function(fn) { return fn ? fn(1) : 1; },
