@@ -1,13 +1,12 @@
 QUnit.test('Setup', function(assert) {
   var sequence = [5, 'plus', 6, 0];
-  var multiDigitSequence = [5, 6, 0];
   var c = new Calculation(sequence);
-  var cMultiDigit = new Calculation(multiDigitSequence);
-  assert.deepEqual(cMultiDigit.sequence, [560],
+  assert.deepEqual(new Calculation([5, 6, 0]).sequence, [560],
     'Merges multi-digit numbers on their own');
   assert.deepEqual(c.sequence, [5, 'plus', 60],
     'Merges multi-digit numbers as part of larger sequence');
-  assert.strictEqual(c.stringify(), '5&plus;60', 'Stringifies simple calculation');
+  assert.strictEqual(c.stringify(), '5&plus;60',
+    'Stringifies simple calculation');
 });
 
 QUnit.test('Basic operators', function(assert) {
@@ -33,6 +32,6 @@ QUnit.test('Negative numbers', function(assert) {
 });
 
 QUnit.test('Floating point numbers', function(assert) {
-  assert.strictEqual(new Calculation([1.2, 'times', 2]).evaluate(), 2.4,
-    'Multiplies floating points');
+  assert.strictEqual(new Calculation([0.1, 'plus', 0.2]).evaluate(), 0.3,
+    'Adds 0.1 and 0.2');
 });
