@@ -21,6 +21,8 @@ QUnit.test('Basic operators', function(assert) {
 });
 
 QUnit.test('Negative numbers', function(assert) {
+  assert.strictEqual(new Calculation(['minus', 10, 'plus', 6]).evaluate(), -4,
+    'Deals with first number being negative');
   assert.strictEqual(new Calculation([10, 'plus', 'minus', 6]).evaluate(), 4,
     'Adds negative numbers');
   assert.strictEqual(new Calculation([10, 'times', 'minus', 6]).evaluate(), -60,

@@ -20,7 +20,7 @@ function Calculation(sequence, initial) {
       return leftOperand + rightOperand;
     },
     minus: function(leftOperand, rightOperand) {
-      return leftOperand - rightOperand;
+      return typeof leftOperand === 'number' ? leftOperand - rightOperand : -1 * rightOperand;
     },
     div: function(leftOperand, rightOperand) {
       return leftOperand / rightOperand;
@@ -39,6 +39,6 @@ Calculation.prototype.evaluate = function() {
     if (typeof el !== 'number') {
       subtotal = that.operator[el](subtotal, seq[i + 1]);
     }
-    return subtotal;
-  });
+    return subtotal || el;
+  }, 0);
 };
