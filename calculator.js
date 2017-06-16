@@ -21,6 +21,12 @@ function Calculation(sequence, initial) {
     },
     minus: function(leftOperand, rightOperand) {
       return leftOperand - rightOperand;
+    },
+    div: function(leftOperand, rightOperand) {
+      return leftOperand / rightOperand;
+    },
+    times: function(leftOperand, rightOperand) {
+      return leftOperand * rightOperand;
     }
   };
 }
