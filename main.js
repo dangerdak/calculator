@@ -24,8 +24,14 @@ window.onload = function() {
         calculation.string.pop();
       }
       else {
+        var previousPress = calculation.sequence[calculation.sequence.length];
         // Add handler function to end of calculation sequence
-        calculation.sequence.push(handlers[e.target.id]);
+        if (previousPress && e.target.classList.contains('number') && typeof previousPress() === 'number') {
+          calculation.sequence[calculation.sequence.length] = functionOrNumber(parseInt(previousPress().toString() + e.target.textContent, 10));
+        }
+        else {
+          calculation.sequence.push(handlers[e.target.id]);
+        }
         // Display calculation sequence
         calculation.string.push(e.target.textContent);
         if (e.target.id === 'equals') {
@@ -67,16 +73,20 @@ var handlers = {
     return total;
   },
   // Return combined digits if acting on number
-  zero: function(fn) { return fn ? fn(0) : 0; },
-  one: function(fn) { return fn ? fn(1) : 1; },
-  two: function(fn) { return fn ? fn(2) : 2; },
-  three: function(fn) { return fn ? fn(3) : 3; },
-  four: function(fn) { return fn ? fn(4) : 4; },
-  five: function(fn) { return fn ? fn(5) : 5; },
-  six: function(fn) { return fn ? fn(6) : 6; },
-  seven: function(fn) { return fn ? fn(7) : 7; },
-  eight: function(fn) { return fn ? fn(8) : 8; },
-  nine: function(fn) { return fn ? fn(9) : 9; }
+  zero: functionOrNumber(0), 
+  one: functionOrNumber(1),
+  two: functionOrNumber(2),
+  three: functionOrNumber(3),
+  four: functionOrNumber(4),
+  five: functionOrNumber(5),
+  six: functionOrNumber(6),
+  seven: functionOrNumber(7),
+  eight: functionOrNumber(8),
+  nine: functionOrNumber(9),
 };
 
-
+  function functionOrNumber(n) {
+    return function(fn) {
+      return fn ? fn(n) : n;
+    };
+  }
