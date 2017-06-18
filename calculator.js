@@ -24,14 +24,16 @@ Calculation.prototype.stringify = function () {
 
 Calculation.prototype.evaluate = function() {
   var that = this;
-  return this.sequence.reduce(function(subtotal, el, i, seq) {
+  var result = this.sequence.reduce(function(subtotal, el, i, seq) {
     // Checks if el is an operator
     if (that.operator[el]) {
       subtotal = that.operator[el](subtotal, seq[i + 1]);
     }
     return subtotal || el;
   }, 0);
-};
+
+  return '' + Math.round(result * 10000000000) / 10000000000;
+}
 
 function Sequence() {
   this.current = [];

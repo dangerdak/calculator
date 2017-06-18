@@ -34,9 +34,11 @@ QUnit.test('Negative numbers', function(assert) {
 */
 });
 
-QUnit.test('Floating point numbers', function(assert) {
+QUnit.test('Floating point arithmetic', function(assert) {
   assert.strictEqual(new Calculation(['0.1', 'plus', '0.2']).evaluate(), '0.3',
     'Adds 0.1 and 0.2');
+  assert.strictEqual(new Calculation(['2.3', 'plus', '2.4']).evaluate(), '4.7',
+    'Adds 2.3 and 2.4');
 });
 
 QUnit.module('Sequence');
