@@ -1,6 +1,37 @@
-function Calculation(sequence) {
+window.onload = function() {
+  var sequence = new Sequence();
+  var buttons = document.getElementsByClassName('btn');
+  var resultElt = document.getElementById('js-result');
+  var calculationElt = document.getElementById('js-calculation');
+  var result;
+  Array.prototype.forEach.call(buttons, function(button) {
+    button.addEventListener('click', function(e) {
+      if (e.target.value === 'clearAll') {
+        sequence.clearAll();
+        sequence.display(calculationElt);
+        resultElt.textContent = '';
+      }
+      else if (e.target.value === 'clearEntry') {
+        sequence.clearEntry();
+        sequence.display(calculationElt);
+        resultElt.textContent = '';
+      }
+      else if (e.target.value === '=') {
+        result = new Calculation(sequence).evaluate();
+        resultElt.textContent = result;
+        calculationElt.textContent += '=' + result;
 
-  this.sequence = sequence;
+      }
+      else {
+        sequence.addItem(e.target.value);
+        sequence.display(calculationElt);
+      }
+    });
+  });
+}
+
+function Calculation(sequence) {
+  this.sequence = sequence.current;
 
   this.operator = {
     plus: function(leftOperand, rightOperand) {
@@ -18,9 +49,6 @@ function Calculation(sequence) {
   };
 }
 
-Calculation.prototype.stringify = function () {
-  return this.sequence.join('').replace(/(\D+)/g, '&$&;');
-};
 
 Calculation.prototype.evaluate = function() {
   var precision = Math.pow(10, 10);
@@ -38,6 +66,23 @@ Calculation.prototype.evaluate = function() {
 
 function Sequence() {
   this.current = [];
+}
+
+Sequence.prototype.stringify = function () {
+  var symbol = {
+    'plus': '+',
+    'minus': '-',
+    'div': '\u00F7',
+    'times': 'x',
+    '.': '.',
+  };
+  return this.current.join('').replace(/\D+/g, function(operator) {
+    return symbol[operator];
+  });
+};
+
+Sequence.prototype.display = function(elt){
+  elt.textContent = this.stringify();
 }
 
 Sequence.prototype.clearAll = function() {
