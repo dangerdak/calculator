@@ -23,6 +23,7 @@ Calculation.prototype.stringify = function () {
 };
 
 Calculation.prototype.evaluate = function() {
+  var precision = Math.pow(10, 10);
   var that = this;
   var result = this.sequence.reduce(function(subtotal, el, i, seq) {
     // Checks if el is an operator
@@ -32,11 +33,21 @@ Calculation.prototype.evaluate = function() {
     return subtotal || el;
   }, 0);
 
-  return '' + Math.round(result * 10000000000) / 10000000000;
+  return '' + Math.round(result * precision) / precision;
 }
 
 function Sequence() {
   this.current = [];
+}
+
+Sequence.prototype.clearAll = function() {
+  this.current = [];
+  return this;
+}
+
+Sequence.prototype.clearEntry = function() {
+  this.current.pop();
+  return this;
 }
 
 Sequence.prototype.addItem = function(item) {

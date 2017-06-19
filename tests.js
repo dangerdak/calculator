@@ -82,3 +82,11 @@ QUnit.test('Decimal points', function(assert) {
   assert.deepEqual(new Sequence().addItem('4').addItem('.').addItem('2').addItem('plus').addItem('1').addItem('.').addItem('1').current, ['4.2', 'plus', '1.1'],
     'Allows multiple decimal numbers');
 });
+QUnit.test('Clear items', function(assert) {
+  assert.deepEqual(new Sequence().addItem('1').addItem('plus').addItem('2').clearEntry().current, ['1', 'plus'],
+    'Can clear last entry');
+  assert.deepEqual(new Sequence().addItem('1').addItem('plus').addItem('2').clearEntry().clearEntry().current, ['1'],
+    'Can clear last two entries');
+  assert.deepEqual(new Sequence().addItem('1').addItem('plus').addItem('2').clearAll().current, [],
+    'Can clear all entries');
+});
