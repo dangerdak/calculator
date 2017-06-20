@@ -23,6 +23,12 @@ window.onload = function() {
 
       }
       else {
+        // If previous result available, use as starting point for calculation
+        if (resultElt.textContent) {
+          sequence.clearAll();
+          sequence.addItem(resultElt.textContent);
+          resultElt.textContent = '';
+        }
         sequence.addItem(e.target.value);
         sequence.display(calculationElt);
       }
