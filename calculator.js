@@ -31,7 +31,7 @@ window.onload = function() {
 }
 
 function Calculation(sequence) {
-  this.sequence = sequence.current;
+  this.sequence = sequence;
 
   this.operator = {
     plus: function(leftOperand, rightOperand) {
@@ -53,9 +53,9 @@ function Calculation(sequence) {
 Calculation.prototype.evaluate = function() {
   var precision = Math.pow(10, 10);
   var that = this;
-  var result = this.sequence.reduce(function(subtotal, el, i, seq) {
-    // Checks if el is an operator
-    if (that.operator[el]) {
+  var result = this.sequence.current.reduce(function(subtotal, el, i, seq) {
+    // Checks if el is an operator and isn't at the end of the sequence
+    if (that.operator[el] && seq[i + 1]) {
       subtotal = that.operator[el](subtotal, seq[i + 1]);
     }
     return subtotal || el;
