@@ -19,8 +19,12 @@ window.onload = function() {
       else if (e.target.value === '=') {
         result = new Calculation(sequence).evaluate();
         resultElt.textContent = result;
+        //if (isNaN(sequence.current[sequence.current.length - 1])) {
+        if (isNaN(sequence.lastEntry)) {
+          sequence.clearEntry();
+          sequence.display(calculationElt);
+        }
         calculationElt.textContent += '=' + result;
-
       }
       else {
         // If previous result available, use as starting point for calculation
@@ -57,6 +61,7 @@ function Calculation(sequence) {
 
 
 Calculation.prototype.evaluate = function() {
+  // To deal with floating point issues
   var precision = Math.pow(10, 10);
   var that = this;
   var result = this.sequence.current.reduce(function(subtotal, el, i, seq) {
@@ -72,7 +77,14 @@ Calculation.prototype.evaluate = function() {
 
 function Sequence() {
   this.current = [];
+
+  Object.defineProperty(this, 'lastEntry', {
+    get: function() {
+      return this.current[this.current.length - 1];
+    }
+  });
 }
+
 
 Sequence.prototype.stringify = function () {
   var symbol = {
