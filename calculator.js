@@ -17,7 +17,7 @@ window.onload = function() {
         resultElt.textContent = '';
       }
       else if (e.target.value === '=') {
-        result = new Calculation(sequence).evaluate();
+        result = new Calculation(sequence.current).evaluate();
         resultElt.textContent = result;
         //if (isNaN(sequence.current[sequence.current.length - 1])) {
         if (isNaN(sequence.lastEntry)) {
@@ -40,8 +40,8 @@ window.onload = function() {
   });
 }
 
-function Calculation(sequence) {
-  this.sequence = sequence;
+function Calculation(sequenceArr) {
+  this.sequence = sequenceArr;
 
   this.operator = {
     plus: function(leftOperand, rightOperand) {
@@ -64,7 +64,7 @@ Calculation.prototype.evaluate = function() {
   // To deal with floating point issues
   var precision = Math.pow(10, 10);
   var that = this;
-  var result = this.sequence.current.reduce(function(subtotal, el, i, seq) {
+  var result = this.sequence.reduce(function(subtotal, el, i, seq) {
     // Checks if el is an operator and isn't at the end of the sequence
     if (that.operator[el] && seq[i + 1]) {
       subtotal = that.operator[el](subtotal, seq[i + 1]);
