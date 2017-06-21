@@ -19,7 +19,7 @@ window.onload = function() {
       else if (e.target.value === '=') {
         result = new Calculation(sequence.current).evaluate();
         resultElt.textContent = result;
-        //if (isNaN(sequence.current[sequence.current.length - 1])) {
+        // Ignore trailing operators
         if (isNaN(sequence.lastEntry)) {
           sequence.clearEntry();
           sequence.display(calculationElt);
@@ -28,9 +28,12 @@ window.onload = function() {
       }
       else {
         // If previous result available, use as starting point for calculation
+        // Unless new item is a number
         if (resultElt.textContent) {
           sequence.clearAll();
-          sequence.addItem(resultElt.textContent);
+          if (isNaN(e.target.value)) {
+            sequence.addItem(resultElt.textContent);
+          }
           resultElt.textContent = '';
         }
         sequence.addItem(e.target.value);
