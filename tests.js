@@ -22,16 +22,12 @@ QUnit.test('Multiple operations', function(assert) {
 QUnit.test('Negative numbers', function(assert) {
   assert.strictEqual(new Calculation(['minus', '10', 'plus', '6']).evaluate(), '-4',
     'Deals with first number being negative');
-  /*
-  assert.strictEqual(new Calculation(['10', 'plus', 'minus', '6']).evaluate(), '4',
+  assert.strictEqual(new Calculation(['10', 'plus', '-6']).evaluate(), '4',
     'Adds negative numbers');
-  assert.strictEqual(new Calculation(['10', 'times', 'minus', '6']).evaluate(), '-60',
+  assert.strictEqual(new Calculation(['10', 'times', '-6']).evaluate(), '-60',
     'Multiplies negative numbers');
-  assert.strictEqual(new Calculation(['12', 'div', 'minus', '6']).evaluate(), '-2',
+  assert.strictEqual(new Calculation(['12', 'div', '-6']).evaluate(), '-2',
     'Divides by negative numbers');
-  assert.strictEqual(new Calculation(['10', 'plus', 'minus', 'minus', '6']).evaluate(), '16',
-    'Deals with multiple negatives');
-*/
 });
 
 QUnit.test('Floating point arithmetic', function(assert) {
@@ -55,6 +51,8 @@ QUnit.test('Adding numbers', function(assert) {
     'Three-digit numbers');
   assert.deepEqual(new Sequence().addItem('minus').addItem('3').current, ['-3'],
     'Negative starting number');
+  assert.deepEqual(new Sequence().addItem('-3').current, ['-3'],
+    'Negative starting number from previous result');
 });
 QUnit.test('Can\'t start with an operator', function(assert) {
   assert.deepEqual(new Sequence().addItem('plus').current, [],
@@ -69,8 +67,12 @@ QUnit.test('Can\'t start with an operator', function(assert) {
 QUnit.test('Adding operators', function(assert) {
   assert.deepEqual(new Sequence().addItem('4').addItem('plus').addItem('3').current, ['4', 'plus', '3'],
     'Plus operator');
-  assert.deepEqual(new Sequence().addItem('4').addItem('plus').addItem('minus').addItem('3').current, ['4', 'minus', '3'],
+  assert.deepEqual(new Sequence().addItem('4').addItem('minus').addItem('3').current, ['4', 'minus', '3'],
+    'Minus operator');
+  assert.deepEqual(new Sequence().addItem('4').addItem('plus').addItem('times').addItem('3').current, ['4', 'times', '3'],
     'Consecutive operators overwrite each other');
+  assert.deepEqual(new Sequence().addItem('4').addItem('times').addItem('minus').addItem('3').current, ['4', 'times', '-3'],
+    'Consecutive operators overwrite each other, except for minus');
 });
 QUnit.test('Decimal points', function(assert) {
   assert.deepEqual(new Sequence().addItem('4').addItem('.').addItem('2').current, ['4.2'],

@@ -24,7 +24,7 @@ window.onload = function() {
         result = new Calculation(sequence.current).evaluate();
         // Ignore equals press if result is already displayed
         if (!resultElt.textContent) {
-          calculationElt.textContent += '=' + result;
+          calculationElt.textContent += ' = ' + result;
         }
         resultElt.textContent = result;
         // Ignore trailing operators
@@ -104,9 +104,9 @@ Sequence.prototype.stringify = function () {
     'times': 'x',
     '.': '.',
   };
-  return this.current.join('').replace(/\D+/g, function(operator) {
-    return symbol[operator];
-  });
+  return this.current.map(function(item) {
+    return symbol[item] || item;
+  }).join(' ');
 };
 
 Sequence.prototype.display = function(elt){
@@ -132,12 +132,13 @@ Sequence.prototype.addItem = function(item) {
     return !isNaN(item);
   }
   var previousItem = this.current[this.current.length - 1];
+  var secondPreviousItem = this.current[this.current.length - 2];
   var length = this.current.length;
   if (isNumeric(item)) {
     if (isNumeric(previousItem) || previousItem === '.') {
       this.current[length - 1] = previousItem + item;
     }
-    else if (previousItem === 'minus' && length === 1) {
+    else if (previousItem === 'minus' && (isOperator(secondPreviousItem) || !secondPreviousItem)) {
       this.current[length - 1] = '-' + item;
     }
     else {
@@ -145,10 +146,13 @@ Sequence.prototype.addItem = function(item) {
     }
   }
   else if (isOperator(item)) {
+    if (item === 'minus' && previousItem !== 'minus') {
+      this.current.push(item);
+    }
     // Don't allow consecutive operators - replace previous one instead
     // Unless previous item is the first item and is a minus - then  don't
     // replace
-    if (isOperator(previousItem) && !(previousItem === 'minus' && length === 1)) {
+    else if (isOperator(previousItem) && !(previousItem === 'minus' && length === 1)) {
       this.current[length - 1] = item;
     }
     // Only add operator on to sequence if it's not first, or it's minus
