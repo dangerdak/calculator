@@ -18,13 +18,16 @@ window.onload = function() {
       }
       else if (e.target.value === '=') {
         result = new Calculation(sequence.current).evaluate();
+        // Ignore equals press if result is already displayed
+        if (!resultElt.textContent) {
+          calculationElt.textContent += '=' + result;
+        }
         resultElt.textContent = result;
         // Ignore trailing operators
         if (isNaN(sequence.lastEntry)) {
           sequence.clearEntry();
           sequence.display(calculationElt);
         }
-        calculationElt.textContent += '=' + result;
       }
       else {
         // If previous result available, use as starting point for calculation
