@@ -12,7 +12,11 @@ window.onload = function() {
         resultElt.textContent = '';
       }
       else if (e.target.value === 'clearEntry') {
-        sequence.clearEntry();
+        // Only clear last entry if result hasn't been found yet
+        // Otherwise just clear result
+        if (!resultElt.textContent) {
+          sequence.clearEntry();
+        }
         sequence.display(calculationElt);
         resultElt.textContent = '';
       }
