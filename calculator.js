@@ -22,6 +22,9 @@ window.onload = function() {
       }
       else if (e.target.value === '=') {
         result = new Calculation(sequence.current).evaluate();
+        if (result.length > 6) {
+          result = parseInt(result, 10).toExponential(4).toString();
+        }
         // Ignore equals press if result is already displayed
         if (!resultElt.textContent) {
           calculationElt.textContent += ' = ' + result;
@@ -126,7 +129,7 @@ Sequence.prototype.clearEntry = function() {
 Sequence.prototype.addItem = function(item) {
   function isOperator(item) {
     return item === 'plus' || item === 'minus' ||
-        item === 'div' || item === 'times';
+      item === 'div' || item === 'times';
   }
   function isNumeric(item) {
     return !isNaN(item);
